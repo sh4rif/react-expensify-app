@@ -6,8 +6,8 @@ module.exports = (env) => {
   const isProduction = env === 'production';
   const CSSExtract = new ExtractTextPlugin('styles.css');
 
-  const absPath = path.join(__dirname, 'public');
 
+  const absPath = path.join(__dirname, 'public', 'dist');
   return {
     entry: './src/app.js',
     // entry: './src/playground/hoc.js',
@@ -54,8 +54,9 @@ module.exports = (env) => {
     // devtool: isProduction ? 'source-map' : 'cheap-module-eval-source-map',
     devtool: isProduction ? 'source-map' : 'inline-source-map',
     devServer: {
-      contentBase: absPath,
-      historyApiFallback: true
+      contentBase: path.join(__dirname, 'public'),
+      historyApiFallback: true,
+      publicPath: '/dist/'
     }
   };
 
